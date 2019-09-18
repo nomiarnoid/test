@@ -13,7 +13,7 @@ git checkout master
 git checkout -b hotfix/my-hotfix
 echo "bye world" > test
 git add .
-git commit -m 'This is the commit from my hotfix' --no-edit
+git commit -m 'This is the commit from my hotfix -example 1' --no-edit
 git push origin hotfix/my-hotfix
 
 # Merge hotfix in master and delete hotfix
@@ -37,7 +37,7 @@ git push origin master
 git checkout -b hotfix/my-hotfix
 echo "hallo munde" > test
 git add .
-git commit -m 'This is the commit from my hotfix' --no-edit
+git commit -m 'This is the commit from my hotfix - example 2' --no-edit
 git push origin hotfix/my-hotfix
 
 # Merge hotfix into master
@@ -66,7 +66,7 @@ git push origin master
 # We add a commit directly on master
 echo "hola que tal" > test
 git add .
-git commit -m 'Master is above develop, this commit will be cherry picked' --no-edit
+git commit -m 'This commit will be cherry picked' --no-edit
 commit="$(git rev-parse HEAD)"
 git push origin master
 
