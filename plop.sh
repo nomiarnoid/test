@@ -1,29 +1,30 @@
 #!/bin/sh
 
-# init an empty git repo
-mkdir test
-cd test
-git init
-git checkout -b master
-
 ## first test : develop is ahead master, hotfix applied to master, then rebase develop on master
-echo "hello world" > test
-git add .
-git commit -m 'First commit' --no-edit
-git checkout -b develop # master and develop are equal
+# First lets make develop ahead master
+git checkout develop
 echo "develop world" > test2
 git add .
-git commit -m 'Develop is now ahead master' --no-edit
+git commit -m 'This commit makes develop ahead master' --no-edit
+git push origin develop
+
+# Now create hotfix
 git checkout master
 git checkout -b hotfix/my-hotfix
 echo "bye world" > test
 git add .
 git commit -m 'This is the commit from my hotfix' --no-edit
+git push origin hotfix/my-hotfix
+
+# Merge hotfix in master and delete hotfix
 git checkout master
-git merge hotfix/my-hotfix --no-edit # master and develop have diverged
-git checkout develop
+git merge hotfix/my-hotfix --no-edit
 git branch -D hotfix/my-hotfix
+
+# Retrieve hotfix on develop by rebasing
+git checkout develop
 git rebase master # No problem here. Conflict will happen if and only if the same lines are modified, just like for any other rebase
+git push origin develop --force-with-lease
 
 ## Now another thing : lets merge hotfix in master AND develop
 git checkout master
