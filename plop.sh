@@ -75,6 +75,10 @@ git checkout develop
 git cherry-pick $commit
 git push origin develop
 
+# Lets now rebase
+git rebase master
+git push origin develop
+
 # What happens if we merge develop into master ?
 git checkout master
 git merge develop --no-edit # No conflict here again, commit is the same
