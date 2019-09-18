@@ -77,7 +77,7 @@ git push origin develop
 
 # Lets now rebase
 git rebase master
-git push origin develop
+git push origin develop --force-with-lease # Needed here, yup
 
 # What happens if we merge develop into master ?
 git checkout master
